@@ -1,5 +1,6 @@
 package com.example.tree;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class IndexNode  {
@@ -20,16 +21,21 @@ public class IndexNode  {
 	// Constructors
 	// Constructor should take in a word and a line number
 	// it should initialize the list and set occurrences to 1
-	
-	
-	
+
+	public IndexNode(String word, int linenumber){
+		this.word = word;
+		this.occurences = 1;
+		this.list = new ArrayList<>();
+
+	}
 	
 	// Complete This
 	// return the word, the number of occurrences, and the lines it appears on.
 	// string must be one line
 	
 	public String toString(){
-		return "";
+
+		return word + " the number of occurrences" + occurences + " the lines it appears on";
 	}
 	
 	

@@ -13,6 +13,9 @@ public class IndexTree{
 	
 	// Make your constructor
 	// It doesn't need to do anything
+	public IndexTree(){
+
+	}
 	
 	// complete the methods below
 	
@@ -20,7 +23,8 @@ public class IndexTree{
 	// it takes in two pieces of data rather than one
 	// call your recursive add method
 	public void add(String word, int lineNumber){
-		
+		this.root = add(root,word,lineNumber);
+
 	}
 	
 	
@@ -31,7 +35,22 @@ public class IndexTree{
 	// you want to  add it to the IndexNode that already exists
 	// otherwise make a new indexNode
 	private IndexNode add(IndexNode root, String word, int lineNumber){
-		return null;
+		if(root == null){
+			return new IndexNode(word,lineNumber);
+		}
+		int compare = word.compareTo(root.word);
+		if(compare==0){
+			return root;
+		}
+		else if (compare<0){
+			root.left = add(root.left,word,lineNumber);
+			return root;
+
+		}
+		else {
+			root.right = add(root.right,word,lineNumber);
+			return root;
+		}
 	}
 	
 	
@@ -39,7 +58,7 @@ public class IndexTree{
 	
 	// returns true if the word is in the index
 	public boolean contains(String word){
-		return false;
+		return true;
 	}
 	
 	// call your recursive method
@@ -66,7 +85,6 @@ public class IndexTree{
 	
 	public static void main(String[] args){
 		IndexTree index = new IndexTree();
-		
 		// add all the words to the tree
 		
 		// print out the index
