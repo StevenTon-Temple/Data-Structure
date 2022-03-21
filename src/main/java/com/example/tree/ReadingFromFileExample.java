@@ -1,4 +1,4 @@
-package index;
+package com.example.tree;
 
 
 import java.io.*;
@@ -15,12 +15,12 @@ public class ReadingFromFileExample {
 			while(scanner.hasNextLine()){
 				String line = scanner.nextLine();
 				System.out.println(line);
-				//String[] words = line.split("\\s+");
-				//for(String word : words){
-				//	word = word.replaceAll(":", "");
-				//	word = word.replaceAll(",", "");
-				//	System.out.println(word);
-				//}
+				String[] words = line.split("\\s+");
+				for(String word : words){
+					word = word.replaceAll(":", "");
+					word = word.replaceAll(",", "");
+					System.out.println(word);
+				}
 			}
 			scanner.close();
 			
