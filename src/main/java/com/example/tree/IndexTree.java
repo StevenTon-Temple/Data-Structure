@@ -39,10 +39,14 @@ public class IndexTree {
 	// otherwise make a new indexNode
 	private IndexNode add(IndexNode root, String word, int lineNumber) {
 		if (root == null) {
-			return new IndexNode(word, lineNumber);
+			IndexNode newnode = new IndexNode(word, lineNumber);
+			newnode.list.add(lineNumber);
+			return newnode;
 		}
 		int compare = word.compareTo(root.word);
 		if (compare == 0) {
+			root.list.add(lineNumber);
+			root.occurences++;
 			return root;
 		} else if (compare < 0) {
 			root.left = add(root.left, word, lineNumber);
@@ -119,7 +123,7 @@ public class IndexTree {
 	// To successfully print it out
 	// this should print out each word followed by the number of occurrences and the list of all occurrences
 	// each word and its data gets its own line
-	public void printIndex(IndexNode root) {
+	public static void printIndex(IndexNode root) {
 		if (root == null) {
 			return;
 		}
@@ -133,22 +137,21 @@ public class IndexTree {
 		IndexTree index = new IndexTree();
 
 		String fileName = "pg100.txt";
+		int linenumber =0;
 		try {
 			Scanner scanner = new Scanner(new File(fileName));
 			while (scanner.hasNextLine()) {
+				linenumber++;
 				String line = scanner.nextLine();
 				String[] words = line.split("\\s+");
 				for(String word : words){
-					word = word.replaceAll(":", "");
-					word = word.replaceAll(",", "");
-					///index.add(word,);
+					word = word.replaceAll("[^\\w\\s']", "");
+					index.add(word,linenumber);
 				}
-
-
-
 			}
 			scanner.close();
-
+			printIndex(index.root);
+			index.delete("threaten");
 			// add all the words to the tree
 
 			// print out the index
@@ -159,5 +162,6 @@ public class IndexTree {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+
 	}
 }

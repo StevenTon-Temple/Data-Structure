@@ -35,7 +35,7 @@ public class IndexNode  {
 	
 	public String toString(){
 		String output="";
-		output+= "The word is "+ this.word + " the number of occurrences " + occurences + " the lines it appears on " + list;
+		output+= "The word is "+ this.word + " the number of occurrences is " + occurences + " the line(s) it appears on " + list;
 		return output;
 	}
 	
