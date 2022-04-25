@@ -1,8 +1,8 @@
+package com.example.maze;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 public class sorting {
@@ -15,16 +15,11 @@ public class sorting {
         long exchanges ;
         double timetaken;
         public String toString(){
-            return size+","+name+"," + comparisons+", " + exchanges +", "+ timetaken;
+            return size+","+name+"," + comparisons+", " + +exchanges +", "+ timetaken;
 
         }
     }
-    public static Data sort(int[] arr){
-        Data d =  new Data();
 
-
-        return d;
-    }
     public static int[] makearray(int length){
         int[] arr = new int[length];
         Random random = new Random();
@@ -185,12 +180,18 @@ public class sorting {
             Insertion_Sort(arr, d);
             datalist.add(d);
             System.out.println(n + " size, " + "\t" + d);
+        }
+        for (int i = 6; i <= 16; i++) {
+            int n = (int) Math.pow(2, i);
             int[] arry = makearray(n);
             Data r = new Data();
             r.size = n;
             QSwrapper(arry, r);
             datalist.add(r);
             System.out.println(n + " size, " + "\t" + r);
+        }
+        for (int i = 6; i <= 16; i++) {
+            int n = (int) Math.pow(2, i);
             int[] arrs = makearray(n);
             Data s = new Data();
             s.size = n;
@@ -218,6 +219,3 @@ public class sorting {
         }
     }
 }
-
-
-

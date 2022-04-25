@@ -1,4 +1,4 @@
-package com.example.hangman;
+package com.example.maze;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -80,6 +80,7 @@ public class Hangman {
                 bestkeysize = keysize;
 
             }
+
         }
 
         return bestKey;
@@ -94,23 +95,24 @@ public class Hangman {
             System.out.println("Please input a letter. ");
             char letter = userinput.next().toLowerCase(Locale.ROOT).charAt(0);
             while (!guessedLetters.add(letter)) {
-                System.out.println("you have already entered this letter please re-enter another letter.");
+                System.out.println("You have already entered this letter please re-enter another letter.");
                 letter = userinput.next().toLowerCase(Locale.ROOT).charAt(0);
             }
             wordfamilies = createWordFamilies(wordfamilies.get(newGameState), guessedLetters);
             newGameState = getBestFamily(wordfamilies);
             System.out.println("Your words guessed are " + guessedLetters);
             System.out.println("Hidden word: "+findWordFamily(newGameState, guessedLetters));
-            if (guesses == 0) {
-                System.out.println("Game over. Nice try. The word was " +wordfamilies.get(newGameState).get(1)+".");
+            if (!findWordFamily(newGameState,guessedLetters).contains(String.valueOf(letter))){
+                guesses--;
             }
-            else if (!findWordFamily(newGameState, guessedLetters).contains("_")) {
+            if (!findWordFamily(newGameState, guessedLetters).contains("_")) {
                 System.out.println("you win");
                 guesses = 0;
             }
-            else if (!findWordFamily(newGameState,guessedLetters).contains(String.valueOf(letter))){
-                guesses--;
+            else if (guesses == 0) {
+                System.out.println("Game over. Nice try. The word was " + wordfamilies.get(newGameState).get(1)+".");
             }
+
             System.out.println("You have " + guesses + " remaining guesses.");
         }
     }
@@ -125,6 +127,7 @@ public class Hangman {
         List<String> wordlist = wordlists.get(wlength);
         game(wordlist, guesses);
         String answer;
+
         do{
             System.out.println("Do you want to play again Yes or No?");
             answer = userinput.next();
